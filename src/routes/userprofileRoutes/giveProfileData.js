@@ -1,0 +1,32 @@
+import user_dataDB from "../../contollers/user_dataDBconnection.js";
+
+import ValidateTokenOrHandleErrors from "../../contollers/validateTokenOrHandleErrors.js";
+
+const giveProfileData = (reqData, res) => {
+  const loginToken = reqData.loginToken;
+
+  const usercredentials = ValidateTokenOrHandleErrors(loginToken, res);
+  if (!usercredentials) return;
+
+  const id = usercredentials.id;
+
+  const sql = "SELECT * FROM profile_data WHERE id = ? LIMIT 1;";
+  const values = [id];
+
+  user_dataDB
+    .query(sql, values)
+    .then((result) => {
+      console.log(result[0]);
+      const rows = result[0];
+      if (rows[0]) res.status(200).json(rows[0]);
+      else {
+        res.status(406).send("no_profile");
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send("unknown_error");
+    });
+};
+
+export default giveProfileData;
