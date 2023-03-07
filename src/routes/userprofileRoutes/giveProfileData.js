@@ -16,7 +16,6 @@ const giveProfileData = (reqData, res) => {
   user_dataDB
     .query(sql, values)
     .then((result) => {
-      console.log(result[0]);
       const rows = result[0];
       if (rows[0]) res.status(200).json(rows[0]);
       else {

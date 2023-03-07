@@ -11,7 +11,7 @@ try {
     res.status(406).send("login_expired");
   else if (err.message === "invalid token")
     res.status(406).send("invalid_login");
-  else {res.status(500).send("undefined_error");console.log(err)}
+  else {res.status(500).send("undefined_error")}
   return false;
 }
 

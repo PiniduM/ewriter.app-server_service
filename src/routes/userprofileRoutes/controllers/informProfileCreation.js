@@ -1,11 +1,10 @@
 import axios from "axios";
 
 const informProfileCreation = async (loginToken) => {
+  const ulr = process.env.URL_SERVER_SERVICE_ROOT + "/s5002/profilecreated";
+
   try {
-    const result = await axios.post(
-      "http://localhost:5001/s5002/profilecreated",
-      { loginToken }
-    );
+    const result = await axios.post(ulr, { loginToken });
     return result.data;
   } catch (err) {
     return err;

@@ -18,7 +18,6 @@ const createProfile = async (reqData, res) => {
 
   const profileData = reqData.profileData;
 
-  console.log(profileData);
 
   const fullName = validateFullName(profileData.fullName)
     ? profileData.fullName
@@ -38,7 +37,6 @@ const createProfile = async (reqData, res) => {
 
   informProfileCreation(loginToken)
   .then(response => {
-    console.log(response);
     if(response === "updated"){
       const sql =
         "INSERT INTO profile_data ( id,full_name, age, gender, country, occupation) VALUES (?, ?, ?, ?, ?, ?);";
@@ -46,20 +44,17 @@ const createProfile = async (reqData, res) => {
     
       user_dataDB
         .query(sql, values)
-        .then((result) => {
-          console.log(result);
+        .then(() => {
           res.status(200).send("profile_created");
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
           res.status(500).send("unknown_ error");
         });
     }else {
       res.status(406).send("already_created")
     }
   })
-  .catch (err => {
-    console.log(err);
+  .catch (() => {
     res.status(500).send("unknown_error")
   })
 

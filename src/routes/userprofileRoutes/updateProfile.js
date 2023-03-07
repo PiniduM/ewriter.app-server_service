@@ -20,7 +20,6 @@ const updateProfile = async (reqData, res) => {
   const values = [];
 
   const newUpdates = reqData.newUpdates;
-  console.log(newUpdates);
 
   if (validateFullName(newUpdates.fullName)) {
     sqlSETsegment += " full_name = ?,";
@@ -46,11 +45,15 @@ const updateProfile = async (reqData, res) => {
     sqlSETsegment += " occupation = ?,";
     values.push(newUpdates.occupation);
   }
-  sqlSETsegment = sqlSETsegment.slice(0, -1);
-  const sql = `UPDATE profile_data ${sqlSETsegment} WHERE id = ?;`;
-  values.push(id);
 
-  console.log(sql);
+  if(values.length === 0) {
+    res.status(406).send("no_data");
+    return;
+  }
+
+  sqlSETsegment = sqlSETsegment.slice(0, -1); // to remove comma
+  const sql = `UPDATE profile_data ${sqlSETsegment} WHERE id = ? LIMIT 1;`;
+  values.push(id);
 
   user_dataDB
     .query(sql, values)
@@ -60,8 +63,7 @@ const updateProfile = async (reqData, res) => {
         res.status(406).send("unknown_error");
       }
     })
-    .catch((err) => {
-      console.log(err);
+    .catch(() => {
       res.status(500).send("unknown_error");
     });
 };
