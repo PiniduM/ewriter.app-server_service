@@ -15,7 +15,7 @@ app.use(cors());
 app.use(json());
 
 
-app.use(userProfileRouter);
+app.use("/profile",userProfileRouter);
 
 app.use("/edrive",eDriveRouter);
 
