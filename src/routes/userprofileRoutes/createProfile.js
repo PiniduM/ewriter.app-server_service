@@ -37,7 +37,6 @@ const createProfile = async (reqData, res) => {
 
   informProfileCreation(loginToken)
   .then(response => {
-    console.log(response);
     if(response === "updated"){
       const sql =
         "INSERT INTO profile_data ( id,full_name, age, gender, country, occupation) VALUES (?, ?, ?, ?, ?, ?);";
