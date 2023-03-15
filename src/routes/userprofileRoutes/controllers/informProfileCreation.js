@@ -7,6 +7,7 @@ const informProfileCreation = async (loginToken) => {
     headers:{"Content-Legth": "67"}
   }
   try {
+    
     const result = await axios.post(ulr, { loginToken },config);
     return result.data;
   } catch (err) {

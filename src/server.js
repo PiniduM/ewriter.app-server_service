@@ -1,7 +1,6 @@
 import express,{ json } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import axios from "axios";
 
 import userProfileRouter from "./routes/userProfileRoutes/userProfileRouter.js";
 import eDriveRouter from "./routes/commonservicesRoutes/eDrive/eDriveRouter.js";
