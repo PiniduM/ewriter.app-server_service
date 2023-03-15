@@ -10,7 +10,7 @@ const informProfileCreation = async (loginToken) => {
     const result = await axios.post(ulr, { loginToken },config);
     return result.data;
   } catch (err) {
-    return err;
+    throw err;
   }
 };
 
