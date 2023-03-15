@@ -21,9 +21,10 @@ const ProvideSavedWritings = (req, res) => {
         res.status(200).json({});
       }
     })
-    .catch(() => {
+    .catch((err) => {
 
-      res.status(500).send("unknown_error");
+      console.log(err);
+      res.status(500).send(err);
     });
 };
 
