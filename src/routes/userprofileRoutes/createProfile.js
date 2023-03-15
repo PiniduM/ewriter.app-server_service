@@ -51,7 +51,7 @@ const createProfile = async (reqData, res) => {
           res.status(500).send("unknown_ error");
         });
     }else {
-      res.status(406).send("already_created")
+      res.status(406).send(response);
     }
   })
   .catch (() => {

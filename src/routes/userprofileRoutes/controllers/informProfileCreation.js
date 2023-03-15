@@ -8,7 +8,6 @@ const informProfileCreation = async (loginToken) => {
   }
   try {
     const result = await axios.post(ulr, { loginToken },config);
-    console.log(result.data,"helo")
     return result.data;
   } catch (err) {
     return err;
