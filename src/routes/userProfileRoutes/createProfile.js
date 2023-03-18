@@ -48,14 +48,14 @@ const createProfile = async (reqData, res) => {
           res.status(200).send("profile_created");
         })
         .catch(() => {
-          res.status(500).send("unexpected_ error");
+          res.status(500).send("unexpected_ result");
         });
     }else {
-      res.status(406).send("unexpected_error");
+      res.status(406).send("unexpected_result");
     }
   })
   .catch (() => {
-    res.status(500).send("unexpected_error")
+    res.status(500).send("inform_error")
   })
 
 };
