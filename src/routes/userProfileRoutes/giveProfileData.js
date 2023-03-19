@@ -1,4 +1,4 @@
-import user_dataDB from "../../contollers/user_dataDBconnection.js";
+import user_dataDBPool from "../../contollers/db/user_dataDBPool.js";
 
 import ValidateTokenOrHandleErrors from "../../contollers/validateTokenOrHandleErrors.js";
 
@@ -13,7 +13,7 @@ const giveProfileData = (reqData, res) => {
   const sql = "SELECT * FROM profile_data WHERE id = ? LIMIT 1;";
   const values = [id];
 
-  user_dataDB
+  user_dataDBPool
     .query(sql, values)
     .then((result) => {
       const rows = result[0];

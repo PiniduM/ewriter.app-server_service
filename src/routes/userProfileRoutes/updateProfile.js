@@ -6,7 +6,7 @@ import {
   validateCountry,
   validateOccupation,
 } from "./controllers/validateProfileData.js";
-import user_dataDB from "../../contollers/user_dataDBconnection.js";
+import user_dataDBPool from "../../contollers/db/user_dataDBPool.js";
 
 const updateProfile = async (reqData, res) => {
   const loginToken = reqData.loginToken;
@@ -55,7 +55,7 @@ const updateProfile = async (reqData, res) => {
   const sql = `UPDATE profile_data ${sqlSETsegment} WHERE id = ? LIMIT 1;`;
   values.push(id);
 
-  user_dataDB
+  user_dataDBPool
     .query(sql, values)
     .then((result) => {
       if (result[0].affectedRows === 1) res.status(200).send("updated");

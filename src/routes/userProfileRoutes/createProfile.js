@@ -1,3 +1,4 @@
+import user_dataDBPool from "../../contollers/db/user_dataDBPool.js";
 import ValidateTokenOrHandleErrors from "../../contollers/validateTokenOrHandleErrors.js";
 import {
   validateFullName,
@@ -6,7 +7,6 @@ import {
   validateCountry,
   validateOccupation,
 } from "./controllers/validateProfileData.js";
-import user_dataDB from "../../contollers/user_dataDBconnection.js";
 import informProfileCreation from "./controllers/informProfileCreation.js";
 const createProfile = async (reqData, res) => {
   const loginToken = reqData.loginToken;
@@ -42,7 +42,7 @@ const createProfile = async (reqData, res) => {
         "INSERT INTO profile_data ( id,full_name, age, gender, country, occupation) VALUES (?, ?, ?, ?, ?, ?);";
       const values = [id, fullName, age, gender, country, occupation];
     
-      user_dataDB
+      user_dataDBPool
         .query(sql, values)
         .then(() => {
           res.status(200).send("profile_created");
