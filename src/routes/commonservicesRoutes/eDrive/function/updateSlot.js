@@ -8,11 +8,12 @@ const updateSlot = async (userId, slotId, newValue) => {
 
   let connection;
   try {
-    connection = user_dataDBPool.getConnection();
+    connection = await user_dataDBPool.getConnection();
     const sql = `UPDATE saved_writings SET ${slotId} = ? WHERE user_id = ? LIMIT 1 ;`;
     const values = [newValue, userId];
 
     const result = await connection.query(sql, values);
+    console.log(result);
     if (result[0].affectedRows === 0) {
       const sql = `INSERT INTO saved_writings(user_id, ${slotId}) VALUES(?, ?);`;
       const values = [userId, newValue];

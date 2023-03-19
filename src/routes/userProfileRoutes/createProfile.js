@@ -18,7 +18,6 @@ const createProfile = async (reqData, res) => {
 
   const profileData = reqData.profileData;
 
-
   const fullName = validateFullName(profileData.fullName)
     ? profileData.fullName
     : "n";
@@ -36,28 +35,27 @@ const createProfile = async (reqData, res) => {
     : "n";
 
   informProfileCreation(loginToken)
-  .then(response => {
-    if(response === "updated"){
-      const sql =
-        "INSERT INTO profile_data ( id,full_name, age, gender, country, occupation) VALUES (?, ?, ?, ?, ?, ?);";
-      const values = [id, fullName, age, gender, country, occupation];
-    
-      user_dataDBPool
-        .query(sql, values)
-        .then(() => {
-          res.status(200).send("profile_created");
-        })
-        .catch(() => {
-          res.status(500).send("unexpected_ result");
-        });
-    }else {
-      res.status(406).send("unexpected_result");
-    }
-  })
-  .catch (() => {
-    res.status(500).send("inform_error")
-  })
+    .then((response) => {
+      if (response === "updated") {
+        const sql =
+          "INSERT INTO profile_data ( id,full_name, age, gender, country, occupation) VALUES (?, ?, ?, ?, ?, ?);";
+        const values = [id, fullName, age, gender, country, occupation];
 
+        user_dataDBPool
+          .query(sql, values)
+          .then(() => {
+            res.status(200).send("profile_created");
+          })
+          .catch(() => {
+            res.status(500).send("unexpected_err");
+          });
+      } else {
+        res.status(406).send("unexpected_result"); //probebly a malformed request (value of profile created have changed explicitly)
+      }
+    })
+    .catch(() => {
+      res.status(500).send("inform_error");
+    });
 };
 
 export default createProfile;
