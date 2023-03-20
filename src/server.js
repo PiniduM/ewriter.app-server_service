@@ -15,9 +15,9 @@ const corsOptions = {
   methods: ["POST"],
 };
 
-server.use(cors(corsOptions));
+app.use(cors(corsOptions));
 
-server.use((req, res, next) => {
+app.use((req, res, next) => {
   console.log(req.headers);
   if (req.headers["content-legth"] === "67") next();
   else res.status(500).send("unauthorized_access");
