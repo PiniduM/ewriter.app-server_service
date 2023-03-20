@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const informProfileCreation = async (loginToken) => {
-  const ulr = process.env.URL_SERVER_SERVICE_ROOT + "/s5002/profilecreated";
+  const ulr = process.env.URL_SERVER_MAIN_ROOT + "/s5002/profilecreated";
 
   const config = {
     headers:{"Content-Legth": "67"}
